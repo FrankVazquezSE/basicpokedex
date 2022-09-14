@@ -6,6 +6,10 @@ const App = () => {
   const [pokemon, setPokemon] = useState("pikachu");
   const [pokemonData, setPokemonData] = useState([]);
   const [pokemonType, setPokemonType] = useState("");
+  const [pokemonHp, setPokemonHp] = useState("");
+  const [pokemonAttack, setPokemonAttack] = useState("");
+  const [pokemonDefense, setpokemonDefense] = useState("");
+  const [pokemonAbility, setpokemonAbility] = useState("");
 
   const handleChange = (e) => {
     setPokemon(e.target.value.toLowerCase());
@@ -21,6 +25,10 @@ const App = () => {
       const res = await axios.get(url);
       toArray.push(res.data);
       setPokemonType(res.data.types[0].type.name);
+      setPokemonHp(res.data.stats[0].base_stat);
+      setPokemonAttack(res.data.stats[1].base_stat);
+      setpokemonDefense(res.data.stats[2].base_stat);
+      setpokemonAbility(res.data.abilities[1].ability.name);
       setPokemonData(toArray);
     } catch (e) {
       console.log(e);
@@ -66,8 +74,28 @@ const App = () => {
                   </div>
                 </div>
                 <div className="divTableRow">
-                  <div className="divTableCell">Number of Battles</div>
-                  <div className="divTableCell">{data.game_indices.length}</div>
+                  <div className="divTableCell">HP</div>
+                  <div className="divTableCell">
+                  {pokemonHp}
+                  </div>
+                </div>
+                <div className="divTableRow">
+                  <div className="divTableCell">Attack</div>
+                  <div className="divTableCell">
+                    {pokemonAttack}
+                  </div>
+                </div>
+                <div className="divTableRow">
+                  <div className="divTableCell">Defense</div>
+                  <div className="divTableCell">
+                    {pokemonDefense}
+                  </div>
+                </div>
+                <div className="divTableRow">
+                  <div className="divTableCell">Ability</div>
+                  <div className="divTableCell">
+                    {pokemonAbility}
+                  </div>
                 </div>
               </div>
             </div>
